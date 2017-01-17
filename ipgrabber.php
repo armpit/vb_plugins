@@ -34,7 +34,11 @@ if (function_exists(geoip_record_by_name)) {
     isset($g['country_name']) ? $country = $g['country_name'] : $country = '';
 
 	// Convert region code to full name
-    $region = geoip_region_name_by_code($ccode, $region);
+    if (isset($region) && $region != '') {
+	$region = geoip_region_name_by_code($ccode, $region);
+    } else {
+	$region = 'unknown';
+    }
 
 	// Build final string
     $gstring = '';
